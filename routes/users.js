@@ -10,6 +10,7 @@ router.get('/sign-up', userController.SignUp);
 router.get('/sign-in', userController.SignIn);
 router.post('/create',userController.create);
 
+
 // use passport as a middleware to authenticate
 router.post('/create-session', passport.authenticate(
     'local',
