@@ -7,10 +7,11 @@ module.exports.create = function (req, res) {
     user: req.user._id
   })
     .then((post) => {
+      req.flash('success', 'Post published!');
       return res.redirect('back');
     })
     .catch((err) => {
-      console.log('Error in creating a post:', err);
+      req.flash('error', err);
       return res.redirect('back');
     });
 };
@@ -24,14 +25,14 @@ module.exports.destroy = async function (req, res) {
             await post.deleteOne();
     
             await Comment.deleteMany({ post: req.params.id });
-    
+            req.flash('success', 'Post and associated comments deleted!');
             return res.redirect('back');
         } else {
             return res.redirect('back');
         }
     } catch (err) {
         // Handle the error
-        console.error(err);
+        req.flash('error', 'You cannot delete this post!');
         return res.status(500).send("Internal Server Error");
     }
 };

@@ -6,7 +6,7 @@ module.exports.profile = async function (req, res) {
        const user = await User.findById(req.params.id).exec();
    
        return res.render('user_profile', {
-         title: 'User Profile',
+         title: 'User_Profile',
          profile_user: user
        });
      } catch (err) {
@@ -70,6 +70,7 @@ module.exports.create = async function(req, res) {
 /* get the Sign In Data */
 
 module.exports.createSession = function(req,res){
+  req.flash('success', 'Logged in Successfully');
      return res.redirect('/')
 }
 
@@ -81,6 +82,7 @@ module.exports.destroySession = function(req, res){
             return res.status(500).send('Internal Server Error');
            }
            } );
- 
+    req.flash('success', 'You have logged out!');
+         
      return res.redirect('/');
  }
