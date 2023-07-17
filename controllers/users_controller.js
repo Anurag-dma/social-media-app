@@ -15,7 +15,7 @@ module.exports.profile = async function (req, res) {
        return res.redirect('back');
      }
    }; 
-
+   
    module.exports.update = async function (req, res) {
     if(req.user.id == req.params.id){
 
